@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Big Friday Cinema</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+    body {
+        background-color: #000f0a;
+        color: #bdbdbd;
+        width: 800px;
+        margin: 0 auto;
+        font-family: 'Press Start 2P', cursive;
+    }
+    h1 {
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+<h1>Big Friday Cinema</h1>
+
+<div style="width: 100%; height: 600px; overflow: hidden;">
+<video id="live-video" style="width: 100%;" poster="/images/technical-problems-bw.jpg" controls />
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.4.1/dash.all.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function (event) {
+    var video_element = document.getElementById('live-video');
+    if (window.MediaSource) {
+        // For good web browsers, use dash.js
+        player = dashjs.MediaPlayer().create();
+        player.initialize(video_element, null, true);
+        player.setFastSwitchEnabled(true);
+        player.attachSource("http://bfpstream.duckdns.org:8080/dash/1234/index.mpd");
+    } else {
+        // For Safari on iOS, use HLS
+        alert("apple le poul");
+        video_element.src = "<your_hls_stream_url>";
+    }
+});
+</script>
+</body>
+</html>
+
