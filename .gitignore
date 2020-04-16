@@ -1,0 +1,13 @@
+.*.sw?
+*.mp4
+*.mkv
+*.zip
+*.tar.gz
+*.tar.xz
+*.tar.bz2
+*.local.json
+pyenv/
+/nginx/certs/*
+/bin/
+/movies/
+
