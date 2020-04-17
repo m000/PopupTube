@@ -1,0 +1,45 @@
+{
+    "server_name": "bfpstream.duckdns.org",
+    "http": {
+        "port": 8080,
+        "root": "html",
+        "ssl_port": 8443,
+        "ssl_certs": "/etc/ssl/certs",
+        "autoindex": true,
+        "sendfile": true
+    },
+    "dash": {
+        "enabled": true,
+        "timesync": false,
+        "http": {
+            "location": "/watch",
+            "cors": false
+        },
+        "rtmp": {
+            "application": "dash",
+            "nested": true,
+            "cleanup": true,
+            "fragment": 2,
+            "playlist_length": 20
+        }
+    },
+    "hls": {
+        "enabled": true,
+        "http": {
+            "location": "/hls"
+        },
+        "rtmp": {
+            "application": "hls",
+            "nested": true
+        }
+    },
+    "rtmp": {
+        "enabled": true,
+        "root": "/tmp",
+        "port": 1935,
+        "chunk": 4096,
+        "publish": ["127.0.0.1", "172.17.0.0/16"],
+        "play": ["all"],
+        "stats": true
+    }
+}

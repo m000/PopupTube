@@ -1,0 +1,22 @@
+{% extends "tpl/include/base.html.j2" %}
+{% block head %}
+	<link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet">
+	<script src="https://vjs.zencdn.net/7.5.5/video.js"></script>
+{% endblock head %}
+
+{% block player %}
+<video id="{{html.player.id}}" class="video-js vjs-default-skin" controls preload="auto" width="640">
+<source src="{{hls_url}}/{{video.id}}/index.m3u8" type="application/x-mpegURL" />
+</video>
+{% endblock player %}
+
+{% block js_body %}
+<script>
+	var player = videojs('#{{html.player.id}}');
+</script>
+{% endblock js_body %}
+
+{#
+			<source src="http://127.0.0.1:8080/hls/test.m3u8" type="application/x-mpegURL" />
+#}
+

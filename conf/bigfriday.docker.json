@@ -1,0 +1,16 @@
+{
+    "docker": {
+        "image": "alqutami/rtmp-hls",
+        "ports": {
+            "http.port": "8080",
+            "http.ssl_port": "8443",
+            "rtmp.port": "127.0.0.1:1935"
+        },
+        "mounts": {
+            "/etc/nginx/nginx.conf": "/home/mstamat/stream/nginx/conf/bfpstream.conf",
+            "/etc/ssl/certs": "/home/mstamat/stream/nginx/certs",
+            "/usr/local/nginx/html": "/home/mstamat/stream/nginx/html",
+            "/tmp/xxx": "/home/mstamat/stream/tmp"
+        }
+    }
+}

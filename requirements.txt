@@ -1,0 +1,5 @@
+Jinja2>=2.11
+PyYAML>=5.3
+MarkupSafe>=1.1
+shutilwhich>=1.1
+git+https://github.com/m000/j2cli.git@master#egg=j2cli

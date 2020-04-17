@@ -1,0 +1,24 @@
+{
+    "html": {
+        "title": "επιτροπή σωτηρίας",
+        "player": {
+            "id": "videoplayer",
+            "poster": "/images/technical-problems-bw.jpg"
+        }
+    },
+    "video": {
+        "id": "2020-05-01",
+        "directory": "movies/nightmare_beach",
+        "movies":  ".*.\\(mkv\\|mp4\\|avi\\|divx\\)",
+        "subtitles": ".*\\.sdh.srt",
+        "libx264": {
+            "maxrate": "2500k",
+            "bufsize": "5000k",
+            "keyint": 45,
+            "crf": 25
+        },
+        "aac": {
+            "bitrate": "160k"
+        }
+    }
+}

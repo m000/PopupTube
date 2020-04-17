@@ -1,0 +1,56 @@
+{% set server_url -%}
+{{ http.ssl_port|ifelse("https", "http") }}://{{
+    server_name }}:{{
+    http.ssl_port|ifelse("http.ssl_port", "http.port")|ctxlookup
+}}
+{%- endset %}
+{% set dash_url -%}
+{{ server_url }}{{ dash.http.location }}
+{%- endset %}
+{% set hls_url -%}
+{{ server_url }}{{ hls.http.location }}
+{%- endset %}
+{% set rtmp_url -%}
+rtmp://{{server_name}}:{{ docker.ports["rtmp.port"] }}
+{%- endset %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{{ html.title|title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+    body {
+        background-color: #000f0a;
+        color: #bdbdbd;
+        width: 800px;
+        margin: 0 auto;
+        font-family: 'Press Start 2P', cursive;
+    }
+    div {
+        margin: 0 auto;
+    }
+    h1 {
+        text-align: center;
+    }
+    </style>
+{% block head %}
+    <!-- add any css/js code here -->
+{% endblock head %}
+</head>
+
+<body>
+<h1>{{ html.title|title }}</h1>
+
+{% block player %}
+    <!-- add player here -->
+{% endblock player %}
+
+{% block js_body %}
+    <!-- add any js code here -->
+{% endblock js_body %}
+
+</body>
+</html>
+
+{# vim: set ft=html: #}
