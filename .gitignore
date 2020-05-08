@@ -6,9 +6,9 @@
 *.tar.xz
 *.tar.bz2
 *.local.json
+*.bak
 pyenv/
 /nginx/certs/*
 /bin/
 /movies/
-run.cmd
-stream.cmd
+/*.cmd

@@ -1,17 +1,14 @@
 {% set server_url -%}
-{{ http.ssl_port|ifelse("https", "http") }}://{{
-    server_name }}:{{
-    http.ssl_port|ifelse("http.ssl_port", "http.port")|ctxlookup
+{{ nginx.ports.https|ifelse("https", "http") }}://{{
+    nginx.server_name }}:{{
+    nginx.ports.https|ifelse("nginx.ports.https", "nginx.ports.http")|ctxlookup
 }}
 {%- endset %}
 {% set dash_url -%}
-{{ server_url }}{{ dash.http.location }}
+{{ server_url }}/{{ nginx.dash.location }}
 {%- endset %}
 {% set hls_url -%}
-{{ server_url }}{{ hls.http.location }}
-{%- endset %}
-{% set rtmp_url -%}
-rtmp://{{server_name}}:{{ docker.ports["rtmp.port"] }}
+{{ server_url }}/{{ nginx.hls.location }}
 {%- endset %}
 <!DOCTYPE html>
 <html lang="en">

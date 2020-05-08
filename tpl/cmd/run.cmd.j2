@@ -1,0 +1,13 @@
+#!/bin/bash
+set -o xtrace
+
+docker run \
+{% for container, host in docker.ports.items() %}
+	-p {{ host }}:{{ container|ctxlookup }} \
+{% endfor %}
+{% for container, host in docker.mounts.items() %}
+	-v {{ host|sh_realpath }}:{{ container }} \
+{% endfor %}
+	{{docker.image}}
+
+{# vim: set ft=sh: #}

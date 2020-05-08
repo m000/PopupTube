@@ -1,0 +1,57 @@
+{
+    "docker": {
+        "image": "alqutami/rtmp-hls",
+        "ports": {
+            "nginx.ports.http": "8080",
+            "nginx.ports.https": "8443",
+            "nginx.ports.rtmp": "127.0.0.1:1935"
+        },
+        "mounts": {
+            "/etc/nginx/nginx.conf": "nginx/conf/nginx.conf",
+            "/etc/ssl/certs": "nginx/certs",
+            "/usr/local/nginx/html": "nginx/html",
+            "/tmp/rtmp": "nginx/tmp"
+        }
+    },
+    "nginx": {
+        "server_name": "popuptube.duckdns.org",
+        "ports": {
+            "http": "8080",
+            "https": "8443",
+            "rtmp": "1935"
+        },
+        "http": {
+            "root": "html",
+            "autoindex": true,
+            "sendfile": true,
+            "certs": "/etc/ssl/certs"
+        },
+        "rtmp": {
+            "enabled": true,
+            "root": "/tmp/rtmp",
+            "auto_push": false,
+            "chunk": 4096,
+            "publish": ["127.0.0.1", "172.17.0.0/16"],
+            "play": [],
+            "stats": true
+        },
+        "dash": {
+            "enabled": true,
+            "location": "dash",
+            "nested": true,
+            "cleanup": true,
+            "fragment": 2,
+            "playlist_length": 20,
+            "timesync": false,
+            "cors": false
+        },
+        "hls": {
+            "enabled": true,
+            "location": "hls",
+            "nested": true,
+            "cleanup": true,
+            "fragment": 2,
+            "playlist_length": 20
+        }
+    }
+}
