@@ -8,7 +8,7 @@
     },
     "media": {
         "video_re": ".*.\\(mkv\\|mp4\\|avi\\|divx\\)",
-        "subtitles_re": ".*\\.en.srt"
+        "subtitles_re": ".*\\.srt"
     },
     "ffmpeg": {
         "bin": "bin/ffmpeg",
