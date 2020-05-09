@@ -111,10 +111,8 @@ rtmp {
         listen {{nginx.ports.rtmp}};
         chunk_size {{nginx.rtmp.chunk}};
 
-        {% if nginx.dash.enabled %}
-        ### rtmp dash start #########################################
         {% filter align_suffix('#') %}
-        application {{nginx.dash.location}} {
+        application {{nginx.rtmp.application}} {
             # Live settings: https://github.com/arut/nginx-rtmp-module/wiki/Directives#live
             live on;  # live mode (one-to-many)
             record off;  # turn off recording to flv
@@ -129,6 +127,8 @@ rtmp {
             {% endfor %}
             deny play all; # disable directly consuming through rtmp
 
+            {% if nginx.dash.enabled %}
+            ### rtmp dash start #########################################
             # Dash settings: https://github.com/arut/nginx-rtmp-module/wiki/Directives#mpeg-dash
             dash {{nginx.dash.enabled|onoff}};  # enable mpeg dash
             dash_path {{nginx.rtmp.root}}/{{nginx.dash.location}};  # dash fragments path
@@ -152,29 +152,11 @@ rtmp {
             #dash_variant _med  bandwidth="1500000" width="1280"  height="720";
             #dash_variant _high bandwidth="5000000" width="1920" height="1080" max;
             #}#
-        }
-        {% endfilter %}
-        ### rtmp dash end ###########################################
-        {% endif %}
+            ### rtmp dash end ###########################################
+            {% endif %}
 
-        {% if nginx.hls.enabled %}
-        ### rtmp hls start ##########################################
-        {% filter align_suffix('#') %}
-        application {{nginx.hls.location}} {
-            # Live settings: https://github.com/arut/nginx-rtmp-module/wiki/Directives#live
-            live on;  # live mode (one-to-many)
-            record off;  # turn off recording to flv
-
-            # Access settings: https://github.com/arut/nginx-rtmp-module/wiki/Directives#access
-            {% for addr in nginx.rtmp.publish %}
-            allow publish {{addr}};
-            {% endfor %}
-            deny publish all;
-            {% for addr in nginx.rtmp.play %}
-            allow play {{addr}};
-            {% endfor %}
-            deny play all;  # disable directly consuming through rtmp
-
+            {% if nginx.dash.enabled %}
+            ### rtmp hls start ##########################################
             # hls settings: https://github.com/arut/nginx-rtmp-module/wiki/Directives#hls
             hls {{nginx.hls.enabled|onoff}};  # enable hls
             hls_path {{nginx.rtmp.root}}/{{nginx.hls.location}};  # hls fragments path
@@ -182,10 +164,10 @@ rtmp {
             hls_fragment {{nginx.hls.fragment}};  # length of hls fragment in sec
             hls_playlist_length {{nginx.hls.playlist_length}};  # length of hls playlist in sec
             hls_cleanup {{nginx.hls.cleanup|onoff}};  # use nginx cache manager to remove old fragments
+            #### rtmp hls end ###########################################
+            {% endif %}
         }
         {% endfilter %}
-        #### rtmp hls end ###########################################
-        {% endif %}
     }
 }
 {% endif %}

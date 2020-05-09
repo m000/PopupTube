@@ -10,9 +10,9 @@ input=$(find {{"MOVIEDIR"|env}} -regex '{{media.video_re}}' -print -quit)
 	subs=""
 {% endif %}
 {% if ":" in rtmp_port -%}
-	rtmp_url="rtmp://{{ rtmp_port }}/{{nginx.hls.location}}"
+	rtmp_url="rtmp://{{ rtmp_port }}/{{nginx.rtmp.application}}"
 {% else -%}
-	rtmp_url="rtmp://127.0.0.1:{{rtmp_port}}/{{nginx.hls.location}}"
+	rtmp_url="rtmp://127.0.0.1:{{rtmp_port}}/{{nginx.rtmp.application}}"
 {% endif %}
 rtmp_key="{{html.video_id}}"
 

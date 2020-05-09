@@ -28,6 +28,7 @@
         },
         "rtmp": {
             "enabled": true,
+            "application": "stream",
             "root": "/tmp/rtmp",
             "auto_push": false,
             "chunk": 4096,
