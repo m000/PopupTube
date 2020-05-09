@@ -66,12 +66,6 @@ http {
             }
             {% endif %}
         }
-        {% if nginx.dash.timesync %}
-        location /time {
-            # empty response - used by dash.js to sync with server time
-            return 200;
-        }
-        {% endif %}
         ### dash end ################################################
         {% endif %}
 
@@ -136,16 +130,6 @@ rtmp {
             dash_fragment {{nginx.dash.fragment}};  # length of dash fragment in sec
             dash_playlist_length {{nginx.dash.playlist_length}};  # length of dash playlist in sec
             dash_cleanup {{nginx.dash.cleanup|onoff}};  # use nginx cache manager to remove old fragments
-
-            {% if nginx.dash.timesync %}
-            # Dash time-sync (requires extra patches)
-            dash_clock_compensation http_head;
-            {% if nginx.ports.https %}
-            dash_clock_helper_uri https://{{nginx.server_name}}:{{nginx.ports.https}}/time;
-            {% else %}
-            dash_clock_helper_uri http://{{nginx.server_name}}:{{nginx.ports.http}}/time;
-            {% endif %}
-            {% endif %}
             ### rtmp dash end ###########################################
             {% endif %}
 

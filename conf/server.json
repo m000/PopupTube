@@ -43,7 +43,6 @@
             "cleanup": true,
             "fragment": 2,
             "playlist_length": 20,
-            "timesync": false,
             "cors": false
         },
         "hls": {
