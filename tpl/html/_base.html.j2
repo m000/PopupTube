@@ -4,12 +4,10 @@
     nginx.ports.https|ifelse("nginx.ports.https", "nginx.ports.http")|ctxlookup
 }}
 {%- endset %}
-{% set dash_url -%}
-{{ server_url }}/{{ nginx.dash.location }}
-{%- endset %}
-{% set hls_url -%}
-{{ server_url }}/{{ nginx.hls.location }}
-{%- endset %}
+{% set dash_url -%}{{server_url}}/{{nginx.dash.location}}{%- endset %}
+{% set hls_url -%}{{server_url}}/{{nginx.hls.location}}{%- endset %}
+{% set dash_video -%}{{dash_url}}/{{html.video_id}}/index.mpd{%- endset %}
+{% set hls_video -%}{{hls_url}}/{{html.video_id}}/index.m3u8{%- endset %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +25,34 @@
     div {
         margin: 0 auto;
     }
+    a {
+        padding: .5em;
+        color: #bdbdbd;
+        text-decoration: underline;
+    }
+    a:hover {
+        color: #000f0a;
+        background-color: #bdbdbd;
+    }
     h1 {
         text-align: center;
+    }
+    div#footer {
+        position: fixed;
+        left: 0px;
+        bottom: 0px;
+        width: 100%;
+        padding: 1em 1em;
+        border-top: solid #bdbdbd 1px;
+        font-size: 40%;
+        text-align: center;
+    }
+    div#footer .links {
+        margin: auto;
+        width: 75%;
+    }
+    div#footer h2: {
+        font-size: 40%;
     }
     </style>
 {% block head %}
@@ -46,6 +70,23 @@
 {% block js_body %}
     <!-- add any js code here -->
 {% endblock js_body %}
+
+{% if html.show_links %}
+<div id="footer">
+<div class="links">
+<h2>alt links</h2>
+<p>
+{% if nginx.dash.enabled %}
+    <a href="dash.html">dash-web</a> &middot; <a href="{{dash_video}}">dash-vlc</a>
+    {% if nginx.hls.enabled %}&middot;{% endif %}
+{% endif %}
+{% if nginx.dash.enabled %}
+    <a href="hls.html">hls-web</a> &middot; <a href="{{hls_video}}">hls-vlc</a>
+{% endif %}
+</p>
+</div>
+</div>
+{% endif %}
 
 </body>
 </html>

@@ -6,7 +6,7 @@
 
 {% block player %}
 <video id="{{html.player_id}}" poster="{{html.poster}}" controls class="video-js vjs-default-skin" preload="auto" width="640" >
-<source src="{{hls_url}}/{{html.video_id}}/index.m3u8" type="application/x-mpegURL" />
+<source src="{{hls_video}}" type="application/x-mpegURL" />
 </video>
 {% endblock player %}
 

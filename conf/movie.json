@@ -3,7 +3,8 @@
         "title": "BF Private Streaming",
         "video_id": "123456",
         "player_id": "videoplayer",
-        "poster": "/images/technical-problems-bw.jpg"
+        "poster": "/images/technical-problems-bw.jpg",
+        "show_links": true
     },
     "media": {
         "video_re": ".*.\\(mkv\\|mp4\\|avi\\|divx\\)",

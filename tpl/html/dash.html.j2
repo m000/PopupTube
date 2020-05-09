@@ -16,11 +16,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         player = dashjs.MediaPlayer().create();
         player.initialize(video_element, null, true);
         player.setFastSwitchEnabled(true);
-        player.attachSource("{{dash_url}}/{{html.video_id}}/index.mpd");
+        player.attachSource("{{dash_video}}");
     } else {
     {% if nginx.hls.enabled %}
         // Use hls for Safari on iOS.
-	video_element.src = "{{hls_url}}/{{html.video_id}}/index.m3u8";
+	video_element.src = "{{hls_video}}";
     {% else %}
         alert("Stream not available on iOS/Safari.");
     {% endif %}
