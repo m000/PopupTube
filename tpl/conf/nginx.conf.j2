@@ -76,6 +76,19 @@ http {
             autoindex {{nginx.http.autoindex|onoff}};
             add_header 'Cache-Control' 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
             expires off;
+            {% if nginx.hls.cors %}
+            # CORS setup (https://www.html5rocks.com/en/tutorials/cors/)
+            add_header 'Access-Control-Allow-Origin' '*' always;
+            add_header 'Access-Control-Expose-Headers' 'Content-Length';
+            # Allow CORS preflight requests
+            if ($request_method = 'OPTIONS') {
+                add_header 'Access-Control-Allow-Origin' '*';
+                add_header 'Access-Control-Max-Age' 1728000;
+                add_header 'Content-Type' 'text/plain charset=UTF-8';
+                add_header 'Content-Length' 0;
+                return 204;
+            }
+            {% endif %}
         }
         ### hls end #################################################
         {% endif %}

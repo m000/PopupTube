@@ -51,7 +51,8 @@
             "nested": true,
             "cleanup": true,
             "fragment": 2,
-            "playlist_length": 20
+            "playlist_length": 20,
+            "cors": false
         }
     }
 }
