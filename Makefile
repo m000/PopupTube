@@ -2,7 +2,7 @@ RM             = rm -vf
 CP             = cp -vf
 J2             = j2 --undefined=strict --
 
-CONFIG        ?= conf/server.json conf/movie.json
+CONFIG        ?= conf/server.json conf/movie.json $(wildcard conf/*.local.json)
 NGINX_TPL     ?= nginx.conf.j2
 STREAM_CONFIG  = movie.json
 MOVIES         = movies
