@@ -13,6 +13,7 @@ HTML_DEFAULT   = dash.html
 
 .PHONY: all clean run stream-% html-%
 .PRECIOUS: run.cmd stream-%.cmd
+.SECONDARY: $$(wildcard nginx/html/%/*.html)
 
 # recipes for files
 %.cmd: tpl/cmd/%.cmd.j2 $(CONFIG)
@@ -32,7 +33,6 @@ nginx/html/%/index.html: nginx/html/%/$(HTML_DEFAULT)
 
 html-%: $(addprefix nginx/html/%/,dash.html hls.html index.html)
 	$(CP) $(wildcard $(MOVIES)/$(*)/*.jpg) nginx/html/$(*)/
-
 
 # actions
 all: nginx/conf/nginx.conf run.cmd
