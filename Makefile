@@ -7,6 +7,7 @@ NGINX_TPL     ?= nginx.conf.j2
 STREAM_CONFIG  = movie.json
 MOVIES         = movies
 HTML_DEFAULT   = dash.html
+HTML_DEFAULT_POSTER = nginx/html/images/technical-problems-bw.jpg
 
 # .SECONDEXPANSION needed for nginx/html/%.html
 .SECONDEXPANSION:
@@ -32,7 +33,7 @@ nginx/html/%/index.html: nginx/html/%/$(HTML_DEFAULT)
 	cd $(@D) && ln -sf $(HTML_DEFAULT) $(@F)
 
 html-%: $(addprefix nginx/html/%/,dash.html hls.html index.html)
-	$(CP) $(wildcard $(MOVIES)/$(*)/*.jpg) nginx/html/$(*)/
+	$(CP) $(wildcard $(MOVIES)/$(*)/*.jpg) $(HTML_DEFAULT_POSTER) nginx/html/$(*)/
 
 # actions
 all: nginx/conf/nginx.conf run.cmd
@@ -48,4 +49,5 @@ stream-%: stream-%.cmd | all html-%
 
 clean:
 	$(RM) $(wildcard *.cmd)
+	sudo $(RM) -r $(wildcard nginx/tmp/*)
 
