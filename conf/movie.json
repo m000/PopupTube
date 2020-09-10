@@ -8,7 +8,8 @@
     },
     "media": {
         "video_re": ".*.\\(mkv\\|mp4\\|avi\\|divx\\)",
-        "subtitles_re": ".*\\.srt"
+        "subs_re": ".*\\.srt",
+        "subs_force_style": "FontSize=22,FontName=IBM Plex Sans"
     },
     "ffmpeg": {
         "bin": "bin/ffmpeg",

@@ -5,7 +5,8 @@ set -o xtrace
 # input and output
 input=$(find {{"MOVIEDIR"|env}} -regex '{{media.video_re}}' -print -quit)
 {% if ffmpeg.subtitles -%}
-	subs=$(find {{"MOVIEDIR"|env}} -regex '{{media.subtitles_re}}' -print -quit)
+	subs=$(find {{"MOVIEDIR"|env}} -regex '{{media.subs_re}}' -print -quit)
+	subs_force_style='{{media.subs_force_style}}'
 {% else -%}
 	subs=""
 {% endif %}
@@ -18,7 +19,12 @@ rtmp_key="{{html.video_id}}"
 
 # subtitles filter
 if [ "$subs" != "" ]; then
-	vf_subs=",subtitles='$subs':force_style='FontSize=22,FontName=LiberationSans'"
+	vf_subs=",subtitles='$subs'"
+
+	if [ "$subs_force_style" != "" ]; then
+		vf_subs="$vf_subs:force_style='$subs_force_style'"
+	fi
+
 	#:'shift=-20\:10'"
 else
 	vf_subs=""
@@ -48,7 +54,7 @@ scale1080p="(iw*sar)*min(1920/(iw*sar)\,1080/ih):ih*min(1920/(iw*sar)\,1080/ih),
 # run command
 {{ffmpeg.bin|sh_realpath}} \
 	-re -i "$input" \
-	-vf scale="$scale720p"$vf_subs \
+	-vf scale="$scale720p""$vf_subs" \
 	{{ffmpegvc}} \
 	{{ffmpegac}} \
 	-strict experimental -f flv \
