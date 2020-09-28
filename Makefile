@@ -6,7 +6,7 @@ CONFIG        ?= conf/server.json conf/movie.json $(wildcard conf/*.local.json)
 NGINX_TPL     ?= nginx.conf.j2
 STREAM_CONFIG  = movie.json
 MOVIES         = movies
-HTML_DEFAULT   = dash.html
+HTML_DEFAULT   = hls.html
 HTML_DEFAULT_POSTER = nginx/html/images/technical-problems-bw.jpg
 
 # .SECONDEXPANSION needed for nginx/html/%.html
