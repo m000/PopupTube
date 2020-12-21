@@ -18,7 +18,7 @@
             "profile": "high",
             "level": "4.1",
             "tune": "zerolatency",
-            "framerate": "30",
+            "framerate": "",
             "maxrate": "2500k",
             "bufsize": "5000k",
             "x264params": "keyint=45",
