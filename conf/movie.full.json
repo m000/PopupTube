@@ -1,0 +1,33 @@
+{
+    "html": {
+        "title": "BF Private Streaming",
+        "video_id": "123456",
+        "player_id": "videoplayer",
+        "poster": "/images/technical-problems-bw.jpg",
+        "show_links": true
+    },
+    "media": {
+        "video_re": ".*.\\(mkv\\|mp4\\|avi\\|divx\\)",
+        "subs_re": ".*\\.srt",
+        "subs_force_style": "FontSize=22,FontName=IBM Plex Sans"
+    },
+    "ffmpeg": {
+        "bin": "bin/ffmpeg",
+        "streams": { "v": 0, "a": 0 },
+        "subtitles": true,
+        "libx264": {
+            "profile": "high",
+            "level": "4.1",
+            "tune": "zerolatency",
+            "framerate": "30",
+            "maxrate": "2500k",
+            "bufsize": "5000k",
+            "x264params": "keyint=45",
+            "crf": 25
+        },
+        "aac": {
+            "channels": 2,
+            "bitrate": "160k"
+        }
+    }
+}
