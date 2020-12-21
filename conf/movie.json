@@ -19,6 +19,7 @@
             "level": "4.1",
             "tune": "zerolatency",
             "framerate": "",
+            "pix_fmt": "",
             "maxrate": "2500k",
             "bufsize": "5000k",
             "x264params": "keyint=45",

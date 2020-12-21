@@ -50,8 +50,9 @@ done
 -c:v libx264 \
 		{{v.profile|sh_opt("-profile:v")}} {{v.level|sh_opt("-level")}} \
 		{{v.framerate|sh_opt("-framerate")}} {{v.maxrate|sh_opt("-maxrate")}} \
-		{{v.tune|sh_opt("-tune")}} {{v.x264params|sh_opt("-x264-params")}} \
-		{{v.bufsize|sh_opt("-bufsize")}} {{v.crf|sh_opt("-crf")}}
+		{{v.pix_fmt|sh_opt("-pix_fmt")}} {{v.x264params|sh_opt("-x264-params")}} \
+		{{v.tune|sh_opt("-tune")}} {{v.bufsize|sh_opt("-bufsize")}} \
+		{{v.crf|sh_opt("-crf")}}
 {%- endset -%}
 
 {% set ffmpegac %}
