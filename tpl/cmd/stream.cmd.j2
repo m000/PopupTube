@@ -46,9 +46,9 @@ fi
 # concatenate video filters
 ffmpeg_vf=""
 for vf in "$vf_scale" "$vf_subs"; do
+	[ -z "$vf" ] && continue
 	ffmpeg_vf="${ffmpeg_vf:+${ffmpeg_vf},}$vf"
 done
-
 
 #####################################################################
 ### Encoding options (silent)
