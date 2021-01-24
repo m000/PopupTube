@@ -1,6 +1,7 @@
 {
     "html": {
         "title": "BF Private Streaming",
+        "subtitle": "You know you like it!",
         "video_id": "123456",
         "player_id": "videoplayer",
         "poster": "/images/technical-problems-bw.jpg",
