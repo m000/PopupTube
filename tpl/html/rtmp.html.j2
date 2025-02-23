@@ -1,0 +1,15 @@
+{% extends "tpl/html/_base.html.j2" %}
+
+{% block head %}
+	<link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+	<script src="https://unpkg.com/video.js/dist/video.js"></script>
+	<script src="https://unpkg.com/videojs-flash/dist/videojs-flash.min.js"></script>
+	<script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+{% endblock head %}
+
+{% block player %}
+<video id="{{html.player.id}}" class="video-js vjs-default-skin" controls preload="auto" width="720" data-setup='{"techOrder": ["html5"]}'>
+<source src="{{rtmp_url}}/{{dash.rtmp.application}}/{{video.id}}" type="rtmp/mp4">
+</video>
+{% endblock player %}
+
